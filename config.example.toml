@@ -1,0 +1,15 @@
+[caldav]
+url = "https://nextcloud.example.com/remote.php/dav"
+username = "michael"
+password = "00000-00000-00000-00000-00000"
+calendar = "Example"
+
+[ews]
+server = "exchange.example.com"
+account = "mailbox@example.com"
+username = "mailbox@example.com"
+password = "123456789"
+impersonate = false
+
+[misc]
+statefile = "syncstate.txt"

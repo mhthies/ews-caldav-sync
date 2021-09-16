@@ -1,0 +1,3 @@
+exchangelib~=4.5.1
+caldav~=0.8.0
+icalendar~=4.0.7
