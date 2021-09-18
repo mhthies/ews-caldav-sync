@@ -7,11 +7,11 @@ import caldav
 import icalendar
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logging.INFO)
 
 with open('config.toml', encoding='utf-8') as f:
     config = toml.load(f)
 
+logging.basicConfig(level=config['misc']['loglevel'])
 
 # EWS connection
 ews_credentials = Credentials(username=config['ews']['username'], password=config['ews']['password'])

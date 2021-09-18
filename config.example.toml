@@ -13,3 +13,4 @@ impersonate = false
 
 [misc]
 statefile = "syncstate.txt"
+loglevel = 30
