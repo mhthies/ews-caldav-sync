@@ -37,3 +37,20 @@ On the first execution, the script will synchronize all contents of the Exchange
 This may take a while (currently, there is no parallelization implemented).
 On every subsequent execution, only changes (new events, updated events, deleted events) since the last execution are propagated to the CalDAV server.
 This is achieved by using the EWS SyncFolderitems service and storing the sync_state token from the Exchange server in the `statefile` as defined in the config file.
+
+## Known Issues
+
+Issues when syncing to a Nextcloud calendar:
+- Nextcloud (since version 22) forbids recreating/updating a calendar item with the id of a previously deleted item.
+  ("400 Bad Request: Deleted calendar object with uid already exists in this calendar collection.")
+  Updates/recreations of previously deleted events in the Exchange calendar – which often happen due to meeting invitation updates – will result in an exception of the ews_calendar_sync script and the update being ignored in the CalDAV calendar.
+  This issue is caused by Nextcloud's new calendar recycle bin feature and is already reported to Nextcloud: https://github.com/nextcloud/server/issues/30096
+- ~~Nextcloud sets ContentType to `text/html` in emtpy responses. The caldav library logs this as a warning to the console ("unexpected content type from server: text/html; charset=UTF-8. Please raise an issue[…]").
+  Reported to caldav library: https://github.com/python-caldav/caldav/issues/142~~
+  Fixed with `caldav` version 0.8.1.
+
+General issues:
+- ~~Events with with a slash in their iCal UID cause errors when being uploaded to the CalDAV server, due to unescaped slashes in the CalDAV object path.
+  Exchange does not create such UIDs itself, but they may be imported with existing iCal datasets into Outlook/Exchange
+  Reported to caldav library: https://github.com/python-caldav/caldav/issues/143~~
+  Mostly fixed with `caldav` version 0.8.1.
