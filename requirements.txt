@@ -1,4 +1,4 @@
-exchangelib~=4.5.1
+exchangelib~=4.5
 caldav~=0.8.1
-icalendar~=4.0.7
+icalendar~=4.0
 toml~=0.10.2
