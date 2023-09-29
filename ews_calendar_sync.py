@@ -25,7 +25,7 @@ import icalendar
 
 logger = logging.getLogger(__name__)
 
-parser = argparse.ArgumentParser(description='Read a TOML configuration file.')
+parser = argparse.ArgumentParser(description='Incrementally synchronizes a Microsoft Exchange calendar to a CalDAV server.')
 parser.add_argument('--config', default='config.toml', help='Path of the TOML configuration file')
 args = parser.parse_args()
 
