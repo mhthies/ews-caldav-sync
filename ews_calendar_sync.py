@@ -17,7 +17,7 @@
 
 import datetime
 import logging
-
+import argparse
 import toml
 from exchangelib import Credentials, Configuration, Account, DELEGATE, IMPERSONATION, CalendarItem
 import caldav
@@ -25,7 +25,11 @@ import icalendar
 
 logger = logging.getLogger(__name__)
 
-with open('config.toml', encoding='utf-8') as f:
+parser = argparse.ArgumentParser(description='Incrementally synchronizes a Microsoft Exchange calendar to a CalDAV server.')
+parser.add_argument('--config', default='config.toml', help='Path of the TOML configuration file')
+args = parser.parse_args()
+
+with open(args.config, encoding='utf-8') as f:
     config = toml.load(f)
 
 logging.basicConfig(level=config['misc']['loglevel'])
