@@ -1,5 +1,9 @@
 FROM python:3.12.1-alpine3.19
 
+LABEL org.opencontainers.image.source=https://github.com/mhthies/ews-caldav-sync
+LABEL org.opencontainers.image.description="Exchange Calendar to CalDAV sync"
+LABEL org.opencontainers.image.licenses=Apache-2.0
+
 ARG USER_UID=1000
 ARG GROUP_GID=1000
 ARG USERNAME=ews_sync
