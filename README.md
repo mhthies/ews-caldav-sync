@@ -29,9 +29,17 @@ Before storing the entry, a few changes are made to the data, using the [icalend
   ```bash
   cp config.example.toml config.toml && $EDITOR config.toml
   ``` 
-- Run `ews_calndar_sync.py` regularly to synchronize changes in the EWS calendar to the CalDAV calendar.
+- Run `ews_calendar_sync.py` regularly to synchronize changes in the EWS calendar to the CalDAV calendar.
   Typically, you would do this using a cron job (`crontab`, etc.) or a systemd Timer Unit.
   Make sure to use the Python interpreter from the virtualenv (if you use one) and run the process in the working directory where the config.toml file is located.
+
+Alternatively, using the Docker container:
+
+- Download the [config file template](./config.example.toml) from this repository, save it as `config.toml` and customize it with the credentials of your Exchange and CalDAV accounts
+- Run `ews_calendar_sync` via docker:
+  ```bash
+  docker run -it --rm --name ews-caldav-sync -v ./config.toml:/app/config.toml -v ./syncstate.txt:/app/syncstate.txt ghcr.io/mhthies/ews-caldav-sync:latest
+  ```
 
 On the first execution, the script will synchronize all contents of the Exchange Calendar to the CalDAV calendar.
 This may take a while (currently, there is no parallelization implemented).
